@@ -4,11 +4,25 @@ const loadData = (searchText) => {
         .then(res => res.json())
         .then(data => displayData(data.data))
 }
-const displayData = (data) => {
-    console.log(data)
+const displayData = (phones) => {
+    console.log(phones)
     const container = document.getElementById('container');
-    container.innerHTML = ''
-    data.forEach(phone => {
+    container.innerHTML = '';
+    // no phone found error condition
+    const noPhone = document.getElementById('noPhone')
+    if (phones.length === 0) {
+        noPhone.classList.remove('hidden')
+    }
+    else {
+        noPhone.classList.add('hidden')
+    }
+    //display to 5 data
+    const showAllPhone = document.getElementById('show-all');
+    if (phones.length > 10) {
+        phones = phones.slice(0, 6);
+        showAllPhone.classList.remove('hidden')
+    }
+    phones.forEach(phone => {
         console.log(phone)
         const div = document.createElement('div');
         div.classList.add('card', 'w-full', 'bg-base-100', 'shadow-xl', 'border');
