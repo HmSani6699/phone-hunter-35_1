@@ -11,7 +11,8 @@ const displayData = (phones, dataLimit) => {
     // no phone found error condition
     const noPhone = document.getElementById('noPhone')
     if (phones.length === 0) {
-        noPhone.classList.remove('hidden')
+        noPhone.classList.remove('hidden');
+        loadingSpinner(false)
     }
     else {
         noPhone.classList.add('hidden')
@@ -49,12 +50,14 @@ const displayData = (phones, dataLimit) => {
                 </div>
             </div>
         `;
-        container.appendChild(div)
+        container.appendChild(div);
+        loadingSpinner(false)
     });
 }
 
 // search filed
 const searchFiled = (dataLimit) => {
+    loadingSpinner(true)
     const inputValue = document.getElementById('search-input').value;
     loadData(inputValue, dataLimit)
 }
@@ -67,4 +70,15 @@ document.getElementById('search-btn').addEventListener('click', function () {
 // show all phone
 document.getElementById('show-all-button').addEventListener('click', function () {
     searchFiled()
-})
+});
+
+// loading spinner 
+const loadingSpinner = (isLoading) => {
+    const spinner = document.getElementById('spinner');
+    if (isLoading) {
+        spinner.classList.remove('hidden')
+    }
+    else {
+        spinner.classList.add('hidden')
+    }
+}
