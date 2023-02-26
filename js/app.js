@@ -1,12 +1,13 @@
-const loadData = () => {
-    const url = `https://openapi.programming-hero.com/api/phones?search=iphone`
+const loadData = (searchText) => {
+    const url = `https://openapi.programming-hero.com/api/phones?search=${searchText}`
     fetch(url)
         .then(res => res.json())
         .then(data => displayData(data.data))
 }
 const displayData = (data) => {
     console.log(data)
-    const container = document.getElementById('container')
+    const container = document.getElementById('container');
+    container.innerHTML = ''
     data.forEach(phone => {
         console.log(phone)
         const div = document.createElement('div');
@@ -34,4 +35,9 @@ const displayData = (data) => {
         container.appendChild(div)
     });
 }
-loadData()
+
+// search phone 
+document.getElementById('search-btn').addEventListener('click', function () {
+    const inputValue = document.getElementById('search-input').value;
+    loadData(inputValue)
+})
