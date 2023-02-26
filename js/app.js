@@ -72,6 +72,13 @@ document.getElementById('show-all-button').addEventListener('click', function ()
     searchFiled()
 });
 
+// add  input enter key event handler
+document.getElementById('search-input').addEventListener('keypress', function (e) {
+    if (e.key === 'Enter') {
+        searchFiled(10)
+    }
+});
+
 // loading spinner 
 const loadingSpinner = (isLoading) => {
     const spinner = document.getElementById('spinner');
